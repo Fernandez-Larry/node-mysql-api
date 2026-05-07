@@ -1,7 +1,8 @@
 import express from 'express';
-const router = express.Router();
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
+
+const router = express.Router();
 
 const swaggerDocument = YAML.load('./swagger.yaml');
 

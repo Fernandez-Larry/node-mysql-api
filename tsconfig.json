@@ -10,8 +10,14 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "types": ["node"]
+    "types": ["node"],
+    "moduleResolution": "node",
+    "ignoreDeprecations": "6.0"
   },
   "include": ["**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "ts-node": {
+    "transpileOnly": true,
+    "files": true
+  }
 }
