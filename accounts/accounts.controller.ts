@@ -1,10 +1,14 @@
 import express from 'express';
 import Joi from 'joi';
-import validateRequest from '../_middleware/validate-request';
 import authorize from '../_middleware/authorize';
-import Role from '../_helpers/role';
-import accountService from './account.service';
+const Role = require('../_helpers/role');
+const accountService = require('./account.service');
+console.log('accountService:', accountService);
+console.log('accountService keys:', Object.keys(accountService));
 
+const validateRequest = require('../_middleware/validate-request').default;
+console.log('validateRequest type:', typeof validateRequest);
+console.log('validateRequest:', validateRequest);
 const router = express.Router();
 
 router.post('/authenticate', authenticateSchema, authenticate);
