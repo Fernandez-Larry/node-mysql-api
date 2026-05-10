@@ -1,7 +1,8 @@
 import express from 'express';
 import Joi from 'joi';
-import authorize from '../_middleware/authorize';
+const authorize = require('../_middleware/authorize').default;
 const Role = require('../_helpers/role');
+console.log('Role:', Role);
 const accountService = require('./account.service');
 console.log('accountService:', accountService);
 console.log('accountService keys:', Object.keys(accountService));
@@ -20,8 +21,8 @@ router.post('/forgot-password', forgotPasswordSchema, forgotPassword);
 router.post('/validate-reset-token', validateResetTokenSchema, validateResetToken);
 router.post('/reset-password', resetPasswordSchema, resetPassword);
 router.get('/', authorize(Role.Admin), getAll);
-router.get('/:id', authorize(), getById);
-router.post('/', authorize(Role.Admin), createSchema, create);
+router.get('/', authorize('Admin'), getAll);
+router.post('/', authorize('Admin'), createSchema, create);
 router.put('/:id', authorize(), updateSchema, update);
 router.delete('/:id', authorize(), _delete);
 
@@ -176,7 +177,7 @@ function createSchema(req: any, res: any, next: any) {
         email: Joi.string().email().required(),
         password: Joi.string().min(6).required(),
         confirmPassword: Joi.string().valid(Joi.ref('password')).required(),
-        role: Joi.string().valid(Role.Admin, Role.User).required()
+        role: Joi.string().valid('Admin', 'User').required()
     });
     validateRequest(req, next, schema);
 }
