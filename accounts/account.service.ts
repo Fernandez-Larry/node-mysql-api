@@ -1,11 +1,10 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const crypto = require('crypto');
+import crypto from 'crypto';
 const { Op } = require('sequelize');
 const sendEmail = require('../_helpers/send-email').default;
 const db = require('../_helpers/db');
 const Role = require('../_helpers/role') || { Admin: 'Admin', User: 'User' };
-const config = require('../config.json');
 
 module.exports = {
     authenticate,
@@ -197,7 +196,7 @@ async function hash(password: any) {
 }
 
 function generateJwtToken(account: any) {
-    return jwt.sign({ sub: account.id, id: account.id }, config.secret, { expiresIn: '15m' });
+    return jwt.sign({ sub: account.id, id: account.id }, process.env.JWT_SECRET || 'SUPER_SECRET_KEY_REPLACE_ME_IN_PRODUCTION', { expiresIn: '15m' });
 }
 
 function generateRefreshToken(account: any, ipAddress: any) {
