@@ -1,6 +1,5 @@
 const { expressjwt } = require('express-jwt');
 const db = require('../_helpers/db');
-const config = require('../config.json');
 
 export default function authorize(roles: any = []) {
     if (typeof roles === 'string') {
@@ -8,7 +7,7 @@ export default function authorize(roles: any = []) {
     }
 
     return [
-        expressjwt({ secret: config.secret, algorithms: ['HS256'] }),
+        expressjwt({ secret: process.env.JWT_SECRET || 'SUPER_SECRET_KEY_REPLACE_ME_IN_PRODUCTION', algorithms: ['HS256'] }),
         async (req: any, res: any, next: any) => {
             const account = await db.Account.findByPk(req.auth.id);
 
