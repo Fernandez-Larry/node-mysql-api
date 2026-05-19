@@ -1,4 +1,5 @@
 export {};
+// Railway deploy fix
 const mysql = require('mysql2/promise');
 const { Sequelize } = require('sequelize');
 
