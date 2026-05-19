@@ -1,7 +1,7 @@
 import express from 'express';
 import Joi from 'joi';
 const authorize = require('../_middleware/authorize').default;
-const Role = require('../_helpers/role');
+const Role = require('../_helpers/role') || { Admin: 'Admin', User: 'User' };
 console.log('Role:', Role);
 const accountService = require('./account.service');
 console.log('accountService:', accountService);

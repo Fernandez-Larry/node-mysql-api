@@ -4,7 +4,7 @@ const crypto = require('crypto');
 const { Op } = require('sequelize');
 const sendEmail = require('../_helpers/send-email').default;
 const db = require('../_helpers/db');
-const Role = require('../_helpers/role').default;
+const Role = require('../_helpers/role') || { Admin: 'Admin', User: 'User' };
 const config = require('../config.json');
 
 module.exports = {
