@@ -1,5 +1,5 @@
 const { expressjwt } = require('express-jwt');
-const db = require('../_helpers/db').default;
+const db = require('../_helpers/db');
 const config = require('../config.json');
 
 export default function authorize(roles: any = []) {
